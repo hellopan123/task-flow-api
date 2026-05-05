@@ -56,6 +56,22 @@ class TkUserController extends AbstractController
         return Result::success();
     }
 
+    /**
+     * Desc: 更新用户
+     * Auth: hello pan
+     * Date: 2/24/26 10:00 PM
+     * @return array
+     * @throws AppException
+     */
+    public function update(): array
+    {
+        $this->check(TkUserRequest::class, 'update');
+        $params = $this->request->all();
+        $this->filter(TkUserFilter::class, $params, 'update');
+        $this->userService->update($params);
+        return Result::success();
+    }
+
     public function updateStatus(): array
     {
         $this->check(TkUserRequest::class, 'update_status');

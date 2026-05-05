@@ -11,5 +11,6 @@ class TkUserFilter extends BaseFilter
         'info' => ['id'],
         'update_status' => ['id', 'status'],
         'add'  => ['salt'=>'__Salt','password' => '__NewPassword','gender','nickname','email','phone','avatar','status'],
+        'update'  => ['id','gender','nickname','email','phone','avatar','status','position'],
     ];
 }

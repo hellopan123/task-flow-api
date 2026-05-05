@@ -67,6 +67,25 @@ class TkUserService
         return TkUserModel::insertGetId($data);
     }
 
+    /**
+     * Desc: 更新操作
+     * Auth: hello pan
+     * Date: 5/5/26 PM7:26
+     * @param array $params
+     * @return bool
+     * @throws AppException
+     */
+    public function update(array $params): bool
+    {
+        $model = TkUserModel::find($params['id']);
+
+        if (!$model) {
+            throw new AppException('用户不存在');
+        }
+
+        return $model->where('id',$params['id'])->update($params) > 0;
+    }
+
     public function updateStatus(array $params): bool
     {
         $model = TkUserModel::find($params['id']);

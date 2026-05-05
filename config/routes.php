@@ -113,6 +113,7 @@ Router::addGroup('/admin', function () {
         Router::get('/info', 'App\Admin\Controller\TkUserController@getInfo');
         Router::get('/all', 'App\Admin\Controller\TkUserController@getAll');
         Router::post('/add', 'App\Admin\Controller\TkUserController@add');
+        Router::post('/update', 'App\Admin\Controller\TkUserController@update');
         Router::post('/update_status', 'App\Admin\Controller\TkUserController@updateStatus');
         Router::post('/delete', 'App\Admin\Controller\TkUserController@delete');
     });

@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace App\Admin\Validate;
 
 use Hyperf\Validation\Request\FormRequest;
+use Hyperf\Validation\Rule;
 
 class TkUserRequest extends FormRequest
 {
     protected array $scenes = [
         'list' => ['page', 'limit'],
         'add' => ['phone', 'password', 'nickname', 'email', 'gender'],
+        'update' => ['id','phone', 'nickname', 'email', 'gender', 'status'],
         'update_status' => ['id', 'status'],
         'delete' => ['id'],
     ];
@@ -22,9 +24,14 @@ class TkUserRequest extends FormRequest
 
     public function rules(): array
     {
+        //var_dump($this->input('id', 0));
         return [
             'id' => 'required|integer|min:1',
-            'phone' => 'required|regex:/^1[3-9]\d{9}$/|unique:tk_user,phone',
+            'phone' => [
+                'required',
+                'regex:/^1[3-9]\d{9}$/',
+                Rule::unique('tk_user')->ignore($this->input('id', 0)),
+            ],
             'password' => 'required|string|min:6|max:20',
             'nickname' => 'string|max:50',
             'email' => 'email|max:100',
